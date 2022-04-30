@@ -20,15 +20,16 @@ const Navbar = ({ tasks }: any) => {
 
         if (tasks.length === 0) {
             alert('Aucune tâches Terminées')
-        } else{
+        } else {
             tasks.map(async (task: any) => {
                 await deleteDoc(doc(firestore, "tasks", task.id))
             })
             alert('Tous les tâches Terminées seront supprimées ')
         }
 
-            
     }
+
+    const user = auth.currentUser
 
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -62,7 +63,7 @@ const Navbar = ({ tasks }: any) => {
                                 <i className="bi bi-person"></i>
                             </Link>
                             <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><Link className="dropdown-item" to="#">Profile</Link></li>
+                                <li><Link className="dropdown-item" to="#">{user?.email}</Link></li>
                                 <li><Link className="dropdown-item" to="#" onClick={onSignOut}>Deconnexion</Link></li>
                             </ul>
                         </li>
